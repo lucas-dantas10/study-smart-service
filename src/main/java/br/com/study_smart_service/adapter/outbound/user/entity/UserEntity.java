@@ -27,6 +27,8 @@ public class UserEntity {
     @Column(nullable = false)
     private String email;
 
+    // TODO: create PICTURE field
+
     @Column(nullable = false)
     private String password;
 

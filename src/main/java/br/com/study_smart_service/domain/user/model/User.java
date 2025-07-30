@@ -9,6 +9,7 @@ public class User {
     private String name;
     private String email;
     private String password;
+    // TODO: create PICTURE field
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
