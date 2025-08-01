@@ -27,10 +27,8 @@ public class UserEntity {
     @Column(nullable = false)
     private String email;
 
-    // TODO: create PICTURE field
-
     @Column(nullable = false)
-    private String password;
+    private String picture;
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false)
@@ -43,7 +41,6 @@ public class UserEntity {
         this.id = user.getId();
         this.name = user.getName();
         this.email = user.getEmail();
-        this.password = user.getPassword();
         this.createdAt = user.getCreatedAt();
         this.updatedAt = user.getUpdatedAt();
     }

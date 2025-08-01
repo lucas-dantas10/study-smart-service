@@ -1,5 +1,9 @@
 package br.com.study_smart_service.adapter.outbound.auth;
 
+import br.com.study_smart_service.application.usecase.user.CreateUserUseCase;
+import br.com.study_smart_service.application.usecase.user.FindUserByEmailUseCase;
+import br.com.study_smart_service.domain.user.dto.CreateUserDto;
+import br.com.study_smart_service.domain.user.model.User;
 import br.com.study_smart_service.utils.jwt.JwtUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,15 +19,17 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
-@Slf4j
-@RequiredArgsConstructor
 @Component
+@RequiredArgsConstructor
+@Slf4j
 public class GoogleOAuth2SuccessHandler implements AuthenticationSuccessHandler {
 
     @Value("${jwt.frontend-redirect-url}")
     private String redirectUrl;
 
     private final JwtUtil jwtUtil;
+    private final FindUserByEmailUseCase findUserByEmailUseCase;
+    private final CreateUserUseCase createUserUseCase;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request,
@@ -36,9 +42,13 @@ public class GoogleOAuth2SuccessHandler implements AuthenticationSuccessHandler 
         String email = oauthUser.getAttribute("email");
         String picture = oauthUser.getAttribute("picture");
 
-        // TODO: createOrUpdate user
+        User user = findUserByEmailUseCase.execute(email);
 
-        String jwt = jwtUtil.generateToken(name, email);
+        if (user == null) {
+            createUserUseCase.execute(new CreateUserDto(name, email, picture));
+        }
+
+        String jwt = jwtUtil.generateToken(name, email, picture);
 
         response.sendRedirect(redirectUrl + "?token=" + jwt);
     }
