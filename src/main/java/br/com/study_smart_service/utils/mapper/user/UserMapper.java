@@ -14,6 +14,7 @@ public interface UserMapper {
             @Mapping(source = "userJpa.id", target = "id"),
             @Mapping(source = "userJpa.name", target = "name"),
             @Mapping(source = "userJpa.email", target = "email"),
+            @Mapping(source = "userJpa.picture", target = "picture"),
             @Mapping(source = "userJpa.createdAt", target = "createdAt"),
             @Mapping(source = "userJpa.updatedAt", target = "updatedAt")
     })
@@ -23,6 +24,7 @@ public interface UserMapper {
             @Mapping(source = "user.id", target = "id"),
             @Mapping(source = "user.name", target = "name"),
             @Mapping(source = "user.email", target = "email"),
+            @Mapping(source = "user.picture", target = "picture"),
             @Mapping(source = "user.createdAt", target = "createdAt"),
             @Mapping(source = "user.updatedAt", target = "updatedAt")
     })
