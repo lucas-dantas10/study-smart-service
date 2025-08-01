@@ -1,0 +1,33 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: study_smart_service
+  datasource:
+    url: jdbc:postgresql://host:port/database
+    username: username
+    password: password
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: example
+            client-secret: example
+            scope: openid,profile,email
+            authorization-grant-type: authorization_code
+        provider:
+          google:
+            authorization-uri: example
+            token-uri: example
+            user-info-uri: example
+            user-name-attribute: example
+jwt:
+  secret: example
+  expiration: 3600
+  frontend-redirect-url: http://localhost:8181
