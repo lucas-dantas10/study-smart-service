@@ -25,7 +25,7 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                        .requestMatchers("/", "/login/**", "/oauth2/**", "/auth/**", "/resource").permitAll()
+                        .requestMatchers("/", "/login/**", "/oauth2/**", "/auth/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .oauth2Login(oauth -> oauth.successHandler(googleOAuth2SuccessHandler))

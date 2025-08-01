@@ -50,7 +50,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         }
 
         UsernamePasswordAuthenticationToken auth =  new UsernamePasswordAuthenticationToken(
-                user.getEmail(), null, List.of());
+                user, null, List.of());
 
         SecurityContextHolder.getContext().setAuthentication(auth);
 
@@ -60,10 +60,9 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
         String path = request.getRequestURI();
-        // TODO: nao passar por esse filtro quando a rota não é protegida
+
         return path.equals("/") ||
                 path.startsWith("/auth/") ||
-                path.startsWith("/oauth2/") ||
-                path.equals("/resource");
+                path.startsWith("/oauth2/");
     }
 }

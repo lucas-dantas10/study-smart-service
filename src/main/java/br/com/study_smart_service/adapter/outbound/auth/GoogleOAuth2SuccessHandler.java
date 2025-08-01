@@ -19,9 +19,9 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
-@Slf4j
-@RequiredArgsConstructor
 @Component
+@RequiredArgsConstructor
+@Slf4j
 public class GoogleOAuth2SuccessHandler implements AuthenticationSuccessHandler {
 
     @Value("${jwt.frontend-redirect-url}")
@@ -48,7 +48,7 @@ public class GoogleOAuth2SuccessHandler implements AuthenticationSuccessHandler 
             createUserUseCase.execute(new CreateUserDto(name, email, picture));
         }
 
-        String jwt = jwtUtil.generateToken(name, email);
+        String jwt = jwtUtil.generateToken(name, email, picture);
 
         response.sendRedirect(redirectUrl + "?token=" + jwt);
     }
