@@ -14,7 +14,6 @@ public interface UserMapper {
             @Mapping(source = "userJpa.id", target = "id"),
             @Mapping(source = "userJpa.name", target = "name"),
             @Mapping(source = "userJpa.email", target = "email"),
-            @Mapping(source = "userJpa.password", target = "password"),
             @Mapping(source = "userJpa.createdAt", target = "createdAt"),
             @Mapping(source = "userJpa.updatedAt", target = "updatedAt")
     })
@@ -24,7 +23,6 @@ public interface UserMapper {
             @Mapping(source = "user.id", target = "id"),
             @Mapping(source = "user.name", target = "name"),
             @Mapping(source = "user.email", target = "email"),
-            @Mapping(source = "user.password", target = "password"),
             @Mapping(source = "user.createdAt", target = "createdAt"),
             @Mapping(source = "user.updatedAt", target = "updatedAt")
     })
@@ -33,7 +31,7 @@ public interface UserMapper {
     @Mappings({
             @Mapping(source = "dto.name", target = "name"),
             @Mapping(source = "dto.email", target = "email"),
-            @Mapping(source = "dto.password", target = "password")
+            @Mapping(source = "dto.picture", target = "picture")
     })
     User dtoToDomain(CreateUserDto dto);
 }

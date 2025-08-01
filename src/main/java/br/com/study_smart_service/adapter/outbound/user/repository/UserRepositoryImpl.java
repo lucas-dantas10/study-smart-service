@@ -30,23 +30,23 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User findByEmail(String email) {
-        Optional<UserEntity> userEntity = this.jpaUserRepository.findByEmail(email);
-
-        return userMapper.jpaToDomain(userEntity.get());
+        return this.jpaUserRepository.findByEmail(email)
+                .map(userMapper::jpaToDomain)
+                .orElse(null);
     }
 
     @Override
     public User findByName(String name) {
-        Optional<UserEntity> userEntity = this.jpaUserRepository.findByName(name);
-
-        return userMapper.jpaToDomain(userEntity.get());
+        return this.jpaUserRepository.findByName(name)
+                .map(userMapper::jpaToDomain)
+                .orElse(null);
     }
 
     @Override
     public User findById(UUID id) {
-        Optional<UserEntity> userEntity = this.jpaUserRepository.findById(id);
-
-        return userMapper.jpaToDomain(userEntity.get());
+        return this.jpaUserRepository.findById(id)
+                .map(userMapper::jpaToDomain)
+                .orElse(null);
     }
 
     @Override

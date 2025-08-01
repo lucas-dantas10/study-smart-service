@@ -8,27 +8,26 @@ public class User {
     private UUID id;
     private String name;
     private String email;
-    private String password;
-    // TODO: create PICTURE field
+    private String picture;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
     public User() {
     }
 
-    public User(UUID id, String name, String email, String password) {
+    public User(UUID id, String name, String email, String picture) {
         this.id = id;
         this.name = name;
         this.email = email;
-        this.password = password;
+        this.picture = picture;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = null;
     }
 
-    public User update(String name, String email, String password) {
+    public User update(String name, String email, String picture) {
         this.name = name;
         this.email = email;
-        this.password = password;
+        this.picture = picture;
 
         return this;
     }
@@ -61,12 +60,12 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPicture() {
+        return picture;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 
     public LocalDateTime getCreatedAt() {

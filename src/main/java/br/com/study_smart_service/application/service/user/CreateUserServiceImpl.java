@@ -1,6 +1,5 @@
 package br.com.study_smart_service.application.service.user;
 
-import br.com.study_smart_service.adapter.outbound.user.entity.UserEntity;
 import br.com.study_smart_service.application.usecase.user.CreateUserUseCase;
 import br.com.study_smart_service.domain.user.dto.CreateUserDto;
 import br.com.study_smart_service.domain.user.model.User;
