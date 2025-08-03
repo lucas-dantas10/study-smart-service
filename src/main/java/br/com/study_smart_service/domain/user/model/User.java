@@ -28,6 +28,7 @@ public class User {
         this.name = name;
         this.email = email;
         this.picture = picture;
+        this.updatedAt = LocalDateTime.now();
 
         return this;
     }

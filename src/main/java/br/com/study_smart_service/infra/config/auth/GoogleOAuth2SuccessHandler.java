@@ -1,7 +1,8 @@
-package br.com.study_smart_service.adapter.outbound.auth;
+package br.com.study_smart_service.infra.config.auth;
 
 import br.com.study_smart_service.application.usecase.user.CreateUserUseCase;
 import br.com.study_smart_service.application.usecase.user.FindUserByEmailUseCase;
+import br.com.study_smart_service.application.usecase.user.UpdateUserUseCase;
 import br.com.study_smart_service.domain.user.dto.CreateUserDto;
 import br.com.study_smart_service.domain.user.model.User;
 import br.com.study_smart_service.utils.jwt.JwtUtil;
@@ -30,11 +31,12 @@ public class GoogleOAuth2SuccessHandler implements AuthenticationSuccessHandler 
     private final JwtUtil jwtUtil;
     private final FindUserByEmailUseCase findUserByEmailUseCase;
     private final CreateUserUseCase createUserUseCase;
+    private final UpdateUserUseCase updateUserUseCase;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request,
                                         HttpServletResponse response,
-                                        Authentication authentication) throws IOException, ServletException {
+                                        Authentication authentication) throws IOException {
         OAuth2AuthenticationToken oauthToken = (OAuth2AuthenticationToken) authentication;
         OAuth2User oauthUser = oauthToken.getPrincipal();
 
@@ -46,6 +48,8 @@ public class GoogleOAuth2SuccessHandler implements AuthenticationSuccessHandler 
 
         if (user == null) {
             createUserUseCase.execute(new CreateUserDto(name, email, picture));
+        } else {
+            updateUserUseCase.execute(user.getId().toString(), name, email, picture);
         }
 
         String jwt = jwtUtil.generateToken(name, email, picture);

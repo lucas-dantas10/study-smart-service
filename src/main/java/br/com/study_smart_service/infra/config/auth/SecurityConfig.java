@@ -1,6 +1,5 @@
 package br.com.study_smart_service.infra.config.auth;
 
-import br.com.study_smart_service.adapter.outbound.auth.GoogleOAuth2SuccessHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
