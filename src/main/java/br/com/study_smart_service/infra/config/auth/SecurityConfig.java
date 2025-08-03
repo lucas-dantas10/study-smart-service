@@ -24,10 +24,22 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                        .requestMatchers("/", "/login/**", "/oauth2/**", "/auth/**").permitAll()
+                        .requestMatchers(
+                            "/",
+                            "/login/**",
+                            "/oauth2/**",
+                            "/auth/**",
+                            "/v3/api-docs/**",
+                            "/swagger-ui/**",
+                            "/swagger-ui.html",
+                            "/swagger-resources/**",
+                            "/webjars/**"
+                        ).permitAll()
                         .anyRequest().authenticated()
                 )
-                .oauth2Login(oauth -> oauth.successHandler(googleOAuth2SuccessHandler))
+                .oauth2Login(oauth -> oauth
+                    .loginPage("/oauth2/authorization/google")
+                    .successHandler(googleOAuth2SuccessHandler))
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
