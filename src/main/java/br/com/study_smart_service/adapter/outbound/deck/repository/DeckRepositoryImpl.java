@@ -23,6 +23,12 @@ public class DeckRepositoryImpl implements DeckRepository {
             .orElse(null);
     }
 
+    public Deck findByIdAndUserId(UUID id, UUID userId) {
+        return jpaDeckRepository.findByIdAndUserId(id, userId)
+                .map(deckMapper::jpaToDomain)
+                .orElse(null);
+    }
+
     public List<Deck> findAllByUserId(UUID userId) {
         return jpaDeckRepository.findAllByUserId(userId)
             .stream()

@@ -8,6 +8,7 @@ import java.util.UUID;
 public interface DeckRepository {
 
     Deck findById(UUID id);
+    Deck findByIdAndUserId(UUID id, UUID userId);
     List<Deck> findAllByUserId(UUID userId);
     Deck save(Deck deck);
     void delete(Deck deck);
