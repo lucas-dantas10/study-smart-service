@@ -4,6 +4,7 @@ import br.com.study_smart_service.adapter.inbound.web.deck.dto.DeckDto;
 import br.com.study_smart_service.adapter.inbound.web.deck.dto.UpdateDeckDto;
 import br.com.study_smart_service.application.usecase.deck.UpdateDeckUseCase;
 import br.com.study_smart_service.domain.user.model.User;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -21,6 +22,7 @@ public class UpdateDeckController {
     private final UpdateDeckUseCase updateDeckUseCase;
 
     @Tag(name = "Deck")
+    @Operation(summary = "Atualiza deck vinculado ao usuário logado")
     @PutMapping(
             value = "/{deckId}",
             consumes = MediaType.APPLICATION_JSON_VALUE,
