@@ -5,6 +5,7 @@ import br.com.study_smart_service.application.usecase.deck.FindOneDeckByIdAndUse
 import br.com.study_smart_service.domain.user.model.User;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +23,7 @@ public class FindOneDeckController {
     private final FindOneDeckByIdAndUserIdUseCase findOneDeckByIdAndUserIdUseCase;
 
     @Tag(name = "Deck")
-    @GetMapping(value = "/{deckId}")
+    @GetMapping(value = "/{deckId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<DeckDto> findDeck(
             @PathVariable("deckId") String deckId,
             Authentication authentication) throws Exception {
