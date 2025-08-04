@@ -40,7 +40,7 @@ public class MeController {
         }
     )
     @GetMapping
-    public ResponseEntity<?> getMe(Authentication authentication) {
+    public ResponseEntity<UserResponseDto> getMe(Authentication authentication) {
         User user = (User) authentication.getPrincipal();
 
         return ResponseEntity.ok(new UserResponseDto(user.getId().toString(),
