@@ -6,6 +6,7 @@ import br.com.study_smart_service.application.usecase.deck.UpdateDeckUseCase;
 import br.com.study_smart_service.domain.user.model.User;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,10 @@ public class UpdateDeckController {
     private final UpdateDeckUseCase updateDeckUseCase;
 
     @Tag(name = "Deck")
-    @PutMapping("/{deckId}")
+    @PutMapping(
+            value = "/{deckId}",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<DeckDto> update(
             @RequestBody UpdateDeckDto dto,
             @PathVariable("deckId") String deck,
