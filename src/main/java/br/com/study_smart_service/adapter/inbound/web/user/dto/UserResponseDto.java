@@ -1,4 +1,4 @@
-package br.com.study_smart_service.domain.user.dto;
+package br.com.study_smart_service.adapter.inbound.web.user.dto;
 
 public record UserResponseDto(
         String id,

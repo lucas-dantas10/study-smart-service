@@ -1,8 +1,8 @@
 package br.com.study_smart_service.adapter.inbound.web.deck;
 
 import br.com.study_smart_service.application.usecase.deck.CreateDeckUseCase;
-import br.com.study_smart_service.domain.deck.dto.CreateDeckDto;
-import br.com.study_smart_service.domain.deck.dto.DeckDto;
+import br.com.study_smart_service.adapter.inbound.web.deck.dto.CreateDeckDto;
+import br.com.study_smart_service.adapter.inbound.web.deck.dto.DeckDto;
 import br.com.study_smart_service.domain.user.model.User;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -10,7 +10,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;

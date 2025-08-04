@@ -1,7 +1,7 @@
 package br.com.study_smart_service.application.service.deck;
 
 import br.com.study_smart_service.application.usecase.deck.CreateDeckUseCase;
-import br.com.study_smart_service.domain.deck.dto.DeckDto;
+import br.com.study_smart_service.adapter.inbound.web.deck.dto.DeckDto;
 import br.com.study_smart_service.domain.deck.model.Deck;
 import br.com.study_smart_service.domain.deck.repository.DeckRepository;
 import br.com.study_smart_service.domain.user.model.User;

@@ -1,7 +1,7 @@
 package br.com.study_smart_service.application.service.user;
 
 import br.com.study_smart_service.application.usecase.user.CreateUserUseCase;
-import br.com.study_smart_service.domain.user.dto.CreateUserDto;
+import br.com.study_smart_service.adapter.inbound.web.user.dto.CreateUserDto;
 import br.com.study_smart_service.domain.user.model.User;
 import br.com.study_smart_service.domain.user.repository.UserRepository;
 import br.com.study_smart_service.utils.mapper.user.UserMapper;

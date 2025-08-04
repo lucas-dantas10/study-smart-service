@@ -1,6 +1,6 @@
 package br.com.study_smart_service.adapter.inbound.web.user;
 
-import br.com.study_smart_service.domain.user.dto.UserResponseDto;
+import br.com.study_smart_service.adapter.inbound.web.user.dto.UserResponseDto;
 import br.com.study_smart_service.domain.user.model.User;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
