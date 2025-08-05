@@ -13,6 +13,6 @@ public interface JpaCardRepository extends JpaRepository<CardEntity, UUID> {
 
     @Query("SELECT card FROM CardEntity card " +
             "JOIN card.deck deck " +
-            "WHERE deck.id = :deckId and deck.user.id = :userId")
-    List<CardEntity> findAllByDeckIdAndUserId(UUID deckId, UUID userId);
+            "WHERE card.id = :cardId AND deck.id = :deckId AND deck.user.id = :userId")
+    List<CardEntity> findAllByDeckIdAndUserId(UUID cardId, UUID deckId, UUID userId);
 }
