@@ -22,7 +22,7 @@ public class UpdateDeckController {
     private final UpdateDeckUseCase updateDeckUseCase;
 
     @Tag(name = "Deck")
-    @Operation(summary = "Atualiza deck vinculado ao usuário logado")
+    @Operation(summary = "Atualiza deck pelo id do deck e vinculado ao usuário logado")
     @PutMapping(
             value = "/{deckId}",
             consumes = MediaType.APPLICATION_JSON_VALUE,
