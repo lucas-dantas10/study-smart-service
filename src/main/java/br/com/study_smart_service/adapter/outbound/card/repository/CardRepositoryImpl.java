@@ -23,8 +23,8 @@ public class CardRepositoryImpl implements CardRepository {
                 .orElse(null);
     }
 
-    public List<Card> findAllByDeckIdAndUserId(UUID cardId, UUID deckId, UUID userId) {
-        return jpaCardRepository.findAllByDeckIdAndUserId(cardId, deckId, userId)
+    public List<Card> findAllByDeckIdAndUserId(UUID deckId, UUID userId) {
+        return jpaCardRepository.findAllByDeckIdAndUserId(deckId, userId)
                 .stream()
                 .map(cardMapper::jpaToDomain)
                 .toList();

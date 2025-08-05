@@ -8,7 +8,7 @@ import java.util.UUID;
 public interface CardRepository {
 
     Card findById(UUID id);
-    List<Card> findAllByDeckIdAndUserId(UUID cardId, UUID deckId, UUID userId);
+    List<Card> findAllByDeckIdAndUserId(UUID deckId, UUID userId);
     Card save(Card card);
     void delete(Card card);
 }
