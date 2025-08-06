@@ -16,7 +16,7 @@ public interface CardMapper {
 
     @Mappings({
             @Mapping(source = "cardJpa.id", target = "id"),
-            @Mapping(source = "cardJpa.deck", target = "deck", ignore = true),
+            @Mapping(source = "cardJpa.deck", target = "deck"),
             @Mapping(source = "cardJpa.frontText", target = "frontText"),
             @Mapping(source = "cardJpa.backText", target = "backText"),
             @Mapping(source = "cardJpa.createdAt", target = "createdAt"),
