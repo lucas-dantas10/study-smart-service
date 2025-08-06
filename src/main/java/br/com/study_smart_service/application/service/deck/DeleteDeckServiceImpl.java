@@ -3,6 +3,7 @@ package br.com.study_smart_service.application.service.deck;
 import br.com.study_smart_service.application.usecase.deck.DeleteDeckUseCase;
 import br.com.study_smart_service.domain.deck.model.Deck;
 import br.com.study_smart_service.domain.deck.repository.DeckRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ public class DeleteDeckServiceImpl implements DeleteDeckUseCase {
 
     private final DeckRepository deckRepository;
 
+    @Transactional
     public void execute(UUID deckId, UUID userId) throws Exception {
         Deck deck = deckRepository.findByIdAndUserId(deckId, userId);
 

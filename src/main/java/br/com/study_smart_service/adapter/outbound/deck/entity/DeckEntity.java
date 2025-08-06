@@ -1,5 +1,6 @@
 package br.com.study_smart_service.adapter.outbound.deck.entity;
 
+import br.com.study_smart_service.adapter.outbound.card.entity.CardEntity;
 import br.com.study_smart_service.adapter.outbound.user.entity.UserEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -27,6 +29,9 @@ public class DeckEntity {
 
     @Column(nullable = false)
     private String title;
+
+    @OneToMany(mappedBy = "deck", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private List<CardEntity> cards;
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false)

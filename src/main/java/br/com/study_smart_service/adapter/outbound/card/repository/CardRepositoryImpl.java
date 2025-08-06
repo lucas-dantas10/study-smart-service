@@ -31,7 +31,7 @@ public class CardRepositoryImpl implements CardRepository {
     }
 
     public Card save(Card card) {
-        CardEntity cardEntity = cardMapper.domainToJpa(card);
+        CardEntity cardEntity = cardMapper.domainToJpaWithDeck(card);
 
         cardEntity = jpaCardRepository.save(cardEntity);
 

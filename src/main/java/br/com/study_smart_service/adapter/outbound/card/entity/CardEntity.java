@@ -20,7 +20,7 @@ public class CardEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(targetEntity = DeckEntity.class, fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "deck_id", nullable = false)
     private DeckEntity deck;
 

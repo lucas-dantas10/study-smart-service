@@ -24,7 +24,7 @@ public class DeckRepositoryImpl implements DeckRepository {
     }
 
     public Deck findByIdAndUserId(UUID id, UUID userId) {
-        return jpaDeckRepository.findByIdAndUserId(id, userId)
+        return jpaDeckRepository.findByIdAndUserIdWithCards(id, userId)
                 .map(deckMapper::jpaToDomain)
                 .orElse(null);
     }
