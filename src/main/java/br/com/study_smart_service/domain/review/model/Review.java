@@ -5,6 +5,7 @@ import br.com.study_smart_service.domain.review.enums.EQuality;
 import br.com.study_smart_service.domain.user.model.User;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class Review {
@@ -22,8 +23,12 @@ public class Review {
     private Integer repetition;
     private Double easiness;
     private Integer lastQuality;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
-    public Review() {
+    public Review(User user, Card card) {
+        this.user = user;
+        this.card = card;
         this.repetition = 0;
         this.interval = 1;
         this.easiness = 2.5;
@@ -31,7 +36,7 @@ public class Review {
     }
 
     public void review(EQuality quality) {
-        int qualityValue = quality.getQuality();
+        lastQuality = quality.getQuality();
 
         if (quality.isDifficult()) {
             repetition = 0;
@@ -52,7 +57,7 @@ public class Review {
             interval = Math.toIntExact(Math.round(interval * easiness));
         }
 
-        easiness += formulaEasiness(qualityValue);
+        easiness += formulaEasiness();
 
         if (easiness < LOWER_LIMIT) {
             easiness = LOWER_LIMIT;
@@ -61,7 +66,7 @@ public class Review {
         nextReviewAt = LocalDate.now().plusDays((long) interval);
     }
 
-    private Double formulaEasiness(int lastQuality) {
+    private Double formulaEasiness() {
         double qualityReward = REWARD_PER_QUALITY * lastQuality;
         double qualityPenalty = QUADRATIC_PENALTY * lastQuality * lastQuality;
 
