@@ -2,19 +2,18 @@ package br.com.study_smart_service.utils.mapper.review;
 
 import br.com.study_smart_service.adapter.outbound.review.entity.ReviewEntity;
 import br.com.study_smart_service.domain.review.model.Review;
-import br.com.study_smart_service.utils.mapper.card.CardMapper;
 import br.com.study_smart_service.utils.mapper.user.UserMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
-@Mapper(componentModel = "spring", uses = {UserMapper.class, CardMapper.class})
+@Mapper(componentModel = "spring", uses = UserMapper.class)
 public interface ReviewMapper {
 
     @Mappings({
         @Mapping(source = "reviewEntity.id", target = "id"),
-        @Mapping(source = "reviewEntity.user", target = "user"),
-        @Mapping(source = "reviewEntity.card", target = "card"),
+        @Mapping(source = "reviewEntity.user", target = "user", ignore = true),
+        @Mapping(source = "reviewEntity.card", target = "card", ignore = true),
         @Mapping(source = "reviewEntity.nextReviewAt", target = "nextReviewAt"),
         @Mapping(source = "reviewEntity.interval", target = "interval"),
         @Mapping(source = "reviewEntity.repetition", target = "repetition"),

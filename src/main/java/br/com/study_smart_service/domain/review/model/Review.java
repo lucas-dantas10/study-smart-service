@@ -35,6 +35,21 @@ public class Review {
         this.nextReviewAt = LocalDate.now();
     }
 
+    public Review createNewReview(LocalDate nextReviewAt,
+                  Integer interval,
+                  Integer repetition,
+                  Double easiness,
+                  Integer lastQuality) {
+        this.nextReviewAt = nextReviewAt;
+        this.interval = interval;
+        this.repetition = repetition;
+        this.easiness = easiness;
+        this.lastQuality = lastQuality;
+        this.createdAt = LocalDateTime.now();
+
+        return this;
+    }
+
     public void review(EQuality quality) {
         lastQuality = quality.getQuality();
 
@@ -42,7 +57,7 @@ public class Review {
             repetition = 0;
             interval = 1;
 
-            nextReviewAt = LocalDate.now().plusDays((long) interval);
+            calculateEasinessAndNextReview();
 
             return;
         }
@@ -57,6 +72,10 @@ public class Review {
             interval = Math.toIntExact(Math.round(interval * easiness));
         }
 
+        calculateEasinessAndNextReview();
+    }
+
+    private void calculateEasinessAndNextReview() {
         easiness += formulaEasiness();
 
         if (easiness < LOWER_LIMIT) {
@@ -71,5 +90,85 @@ public class Review {
         double qualityPenalty = QUADRATIC_PENALTY * lastQuality * lastQuality;
 
         return -PENALTY_BASE + qualityReward - qualityPenalty;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Card getCard() {
+        return card;
+    }
+
+    public void setCard(Card card) {
+        this.card = card;
+    }
+
+    public LocalDate getNextReviewAt() {
+        return nextReviewAt;
+    }
+
+    public void setNextReviewAt(LocalDate nextReviewAt) {
+        this.nextReviewAt = nextReviewAt;
+    }
+
+    public Integer getInterval() {
+        return interval;
+    }
+
+    public void setInterval(Integer interval) {
+        this.interval = interval;
+    }
+
+    public Integer getRepetition() {
+        return repetition;
+    }
+
+    public void setRepetition(Integer repetition) {
+        this.repetition = repetition;
+    }
+
+    public Double getEasiness() {
+        return easiness;
+    }
+
+    public void setEasiness(Double easiness) {
+        this.easiness = easiness;
+    }
+
+    public Integer getLastQuality() {
+        return lastQuality;
+    }
+
+    public void setLastQuality(Integer lastQuality) {
+        this.lastQuality = lastQuality;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

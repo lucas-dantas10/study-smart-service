@@ -1,0 +1,51 @@
+package br.com.study_smart_service.application.service.review;
+
+import br.com.study_smart_service.application.usecase.review.ReviewCardUseCase;
+import br.com.study_smart_service.domain.card.model.Card;
+import br.com.study_smart_service.domain.card.repository.CardRepository;
+import br.com.study_smart_service.domain.review.enums.EQuality;
+import br.com.study_smart_service.domain.review.model.Review;
+import br.com.study_smart_service.domain.review.repository.ReviewRepository;
+import br.com.study_smart_service.domain.user.model.User;
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.UUID;
+
+@Service
+@RequiredArgsConstructor
+public class ReviewCardServiceImpl implements ReviewCardUseCase {
+
+    private final CardRepository cardRepository;
+    private final ReviewRepository reviewRepository;
+
+    @Transactional
+    public void execute(User user, UUID cardId, int quality) throws Exception {
+        Card card = cardRepository.findByIdAndUserId(cardId, user.getId());
+
+        if (card == null) {
+            throw new Exception("Card não encontrado.");
+        }
+
+        Review reviewModel = reviewRepository.findFirstByCardIdAndUserId(cardId, user.getId());
+
+        if (reviewModel == null) {
+            reviewModel = new Review(user, card);
+        } else {
+            reviewModel = new Review(user, card).createNewReview(
+                    reviewModel.getNextReviewAt(),
+                    reviewModel.getInterval(),
+                    reviewModel.getRepetition(),
+                    reviewModel.getEasiness(),
+                    reviewModel.getLastQuality()
+            );
+        }
+
+
+
+        reviewModel.review(EQuality.fromQuality(quality));
+
+        reviewRepository.save(reviewModel);
+    }
+}

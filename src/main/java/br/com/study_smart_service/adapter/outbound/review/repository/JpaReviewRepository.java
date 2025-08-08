@@ -9,5 +9,5 @@ import java.util.UUID;
 @Repository
 public interface JpaReviewRepository extends JpaRepository<ReviewEntity, UUID> {
 
-    ReviewEntity findOneByIdAndUserId(UUID id, UUID userId);
+    ReviewEntity findFirstByCardIdAndUserIdOrderByCreatedAtDesc(UUID cardId, UUID userId);
 }

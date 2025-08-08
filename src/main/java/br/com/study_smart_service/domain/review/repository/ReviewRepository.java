@@ -6,6 +6,6 @@ import java.util.UUID;
 
 public interface ReviewRepository {
 
-    Review findOneByIdAndUserId(UUID id, UUID userId);
+    Review findFirstByCardIdAndUserId(UUID id, UUID userId);
     Review save(Review review);
 }

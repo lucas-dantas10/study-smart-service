@@ -16,8 +16,8 @@ public class ReviewRepositoryImpl implements ReviewRepository {
     private final JpaReviewRepository jpaReviewRepository;
     private final ReviewMapper reviewMapper;
 
-    public Review findOneByIdAndUserId(UUID id, UUID userId) {
-        ReviewEntity reviewEntity = jpaReviewRepository.findOneByIdAndUserId(id, userId);
+    public Review findFirstByCardIdAndUserId(UUID id, UUID userId) {
+        ReviewEntity reviewEntity = jpaReviewRepository.findFirstByCardIdAndUserIdOrderByCreatedAtDesc(id, userId);
 
         return reviewMapper.jpaToDomain(reviewEntity);
     }
