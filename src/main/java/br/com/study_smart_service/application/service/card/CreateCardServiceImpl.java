@@ -6,6 +6,7 @@ import br.com.study_smart_service.domain.card.model.Card;
 import br.com.study_smart_service.domain.card.repository.CardRepository;
 import br.com.study_smart_service.domain.deck.model.Deck;
 import br.com.study_smart_service.domain.deck.repository.DeckRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,7 @@ public class CreateCardServiceImpl implements CreateCardUseCase {
         Deck deck = deckRepository.findByIdAndUserId(deckId, userId);
 
         if (deck == null) {
-            throw new Exception("Deck não encontrado.");
+            throw new EntityNotFoundException("Deck não encontrado.");
         }
 
         Card card = new Card(deck, frontText, backText);

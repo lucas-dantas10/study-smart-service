@@ -3,6 +3,7 @@ package br.com.study_smart_service.application.service.card;
 import br.com.study_smart_service.application.usecase.card.DeleteCardByIdAndUserIdUseCase;
 import br.com.study_smart_service.domain.card.model.Card;
 import br.com.study_smart_service.domain.card.repository.CardRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,7 @@ public class DeleteCardByIdAndUserIdServiceImpl implements DeleteCardByIdAndUser
         Card card = cardRepository.findByIdAndUserId(cardId, userId);
 
         if (card == null) {
-            throw new Exception("Card não encontrado.");
+            throw new EntityNotFoundException("Card não encontrado.");
         }
 
         cardRepository.delete(card);

@@ -4,6 +4,7 @@ import br.com.study_smart_service.adapter.inbound.web.deck.dto.DeckDto;
 import br.com.study_smart_service.application.usecase.deck.FindOneDeckByIdAndUserIdUseCase;
 import br.com.study_smart_service.domain.deck.model.Deck;
 import br.com.study_smart_service.domain.deck.repository.DeckRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,7 @@ public class FindOneDeckByIdAndUserIdServiceImpl implements FindOneDeckByIdAndUs
         Deck deck = deckRepository.findByIdAndUserId(deckId, userId);
 
         if (deck == null) {
-            throw new Exception("Deck não encontrado.");
+            throw new EntityNotFoundException("Deck não encontrado.");
         }
 
         return new DeckDto(

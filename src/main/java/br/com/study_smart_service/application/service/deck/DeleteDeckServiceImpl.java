@@ -4,6 +4,7 @@ import br.com.study_smart_service.application.usecase.deck.DeleteDeckUseCase;
 import br.com.study_smart_service.domain.deck.model.Deck;
 import br.com.study_smart_service.domain.deck.repository.DeckRepository;
 import br.com.study_smart_service.domain.review.repository.ReviewRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class DeleteDeckServiceImpl implements DeleteDeckUseCase {
         Deck deck = deckRepository.findByIdAndUserId(deckId, userId);
 
         if (deck == null) {
-            throw new Exception("Deck não encontrado.");
+            throw new EntityNotFoundException("Deck não encontrado.");
         }
 
         deck.getCards().forEach(card -> {

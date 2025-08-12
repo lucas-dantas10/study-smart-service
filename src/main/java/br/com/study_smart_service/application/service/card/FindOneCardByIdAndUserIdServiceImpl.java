@@ -4,6 +4,7 @@ import br.com.study_smart_service.adapter.inbound.web.card.dto.CardDto;
 import br.com.study_smart_service.application.usecase.card.FindOneCardByIdAndUserIdUseCase;
 import br.com.study_smart_service.domain.card.model.Card;
 import br.com.study_smart_service.domain.card.repository.CardRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,7 @@ public class FindOneCardByIdAndUserIdServiceImpl implements FindOneCardByIdAndUs
         Card card = this.cardRepository.findByIdAndUserId(cardId, userId);
 
         if (card == null) {
-            throw new Exception("Card não encontrado.");
+            throw new EntityNotFoundException("Card não encontrado.");
         }
 
         return new CardDto(

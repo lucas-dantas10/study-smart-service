@@ -7,6 +7,7 @@ import br.com.study_smart_service.domain.review.enums.EQuality;
 import br.com.study_smart_service.domain.review.model.Review;
 import br.com.study_smart_service.domain.review.repository.ReviewRepository;
 import br.com.study_smart_service.domain.user.model.User;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,7 @@ public class ReviewCardServiceImpl implements ReviewCardUseCase {
         Card card = cardRepository.findByIdAndUserId(cardId, user.getId());
 
         if (card == null) {
-            throw new Exception("Card não encontrado.");
+            throw new EntityNotFoundException("Card não encontrado.");
         }
 
         Review reviewModel = reviewRepository.findFirstByCardIdAndUserId(cardId, user.getId());
