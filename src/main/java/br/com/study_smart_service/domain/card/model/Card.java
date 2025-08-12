@@ -17,6 +17,15 @@ public class Card {
     public Card() {
     }
 
+    public Card(UUID id, String frontText, String backText, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        this.id = id;
+        this.deck = deck;
+        this.frontText = frontText;
+        this.backText = backText;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
     public Card(Deck deck, String frontText, String backText) {
         this.deck = deck;
         this.frontText = frontText;

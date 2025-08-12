@@ -8,4 +8,5 @@ public interface ReviewRepository {
 
     Review findFirstByCardIdAndUserId(UUID id, UUID userId);
     Review save(Review review);
+    void deleteByCardId(UUID cardId);
 }

@@ -34,8 +34,10 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         String authHeader = request.getHeader("Authorization");
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            response.setStatus(HttpStatus.UNAUTHORIZED.value());
-            throw new AuthorizationDeniedException("Não autorizado");
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.setContentType("application/json");
+            response.getWriter().write("{\"error\": \"Não autorizado\"}");
+            return;
         }
 
         String token = authHeader.substring(7);
@@ -45,8 +47,10 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         User user = userRepository.findByEmail(claims.getSubject());
 
         if (user == null) {
-            response.setStatus(HttpStatus.UNAUTHORIZED.value());
-            throw new BadRequestException("Token inválido");
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.setContentType("application/json");
+            response.getWriter().write("{\"error\": \"Token inválido\"}");
+            return;
         }
 
         UsernamePasswordAuthenticationToken auth =  new UsernamePasswordAuthenticationToken(

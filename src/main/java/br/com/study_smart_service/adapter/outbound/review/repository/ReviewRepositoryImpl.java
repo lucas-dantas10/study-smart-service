@@ -29,4 +29,8 @@ public class ReviewRepositoryImpl implements ReviewRepository {
 
         return reviewMapper.jpaToDomain(reviewEntity);
     }
+
+    public void deleteByCardId(UUID cardId) {
+        jpaReviewRepository.deleteByCardId(cardId);
+    }
 }

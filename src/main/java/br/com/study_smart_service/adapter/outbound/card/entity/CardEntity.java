@@ -35,4 +35,12 @@ public class CardEntity {
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    public CardEntity(UUID id, String frontText, String backText, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        this.id = id;
+        this.frontText = frontText;
+        this.backText = backText;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
 }
