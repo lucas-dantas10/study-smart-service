@@ -38,3 +38,5 @@ jwt:
 rate-limit:
   minutes: 1
   tokens: 10
+frontend:
+  uri: http://localhost:5173
