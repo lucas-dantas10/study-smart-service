@@ -35,3 +35,6 @@ jwt:
   secret: example
   expiration: 3600
   frontend-redirect-url: http://localhost:8181
+rate-limit:
+  minutes: 1
+  tokens: 10
