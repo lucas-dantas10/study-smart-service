@@ -7,7 +7,7 @@ spring:
     url: ${DATABASE_URL}
     username: ${DATABASE_USERNAME}
     password: ${DATABASE_PASSWORD}
-    driver-class-name: org.postgresql.Driver
+    driver-class-name: com.mysql.jdbc.Driver
     hikari:
       initialization-fail-timeout: 60000
       connection-timeout: 30000
