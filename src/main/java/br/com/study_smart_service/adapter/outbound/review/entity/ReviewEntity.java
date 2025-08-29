@@ -34,7 +34,7 @@ public class ReviewEntity {
     @Column(name = "next_review_at", nullable = false)
     private LocalDate nextReviewAt;
 
-    @Column(nullable = false)
+    @Column(name = "review_interval", nullable = false)
     private Integer interval;
 
     @Column(nullable = false)

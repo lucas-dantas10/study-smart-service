@@ -43,8 +43,6 @@ public class ReviewCardServiceImpl implements ReviewCardUseCase {
             );
         }
 
-
-
         reviewModel.review(EQuality.fromQuality(quality));
 
         reviewRepository.save(reviewModel);
