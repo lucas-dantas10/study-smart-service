@@ -26,8 +26,7 @@ public class DailyUserEmailScheduler {
     private final UserRepository userRepository;
     private final CardRepository cardRepository;
 
-//    "0 0 8 * * *", zone = "America/Sao_Paulo"
-    @Scheduled(fixedDelay = 5000)
+    @Scheduled(cron = "0 0 8 * * *", zone = "America/Sao_Paulo")
     @Transactional(readOnly = true)
     public void execute() {
         LogUtils.log(this.getClass().toString(), "starts scheduling user email", false);
