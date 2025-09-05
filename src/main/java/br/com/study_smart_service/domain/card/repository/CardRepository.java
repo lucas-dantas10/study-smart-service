@@ -11,6 +11,7 @@ public interface CardRepository {
     Card findByIdAndUserId(UUID id, UUID userId);
     List<Card> findAllByDeckIdAndUserId(UUID deckId, UUID userId);
     List<Card> findAllStudyCardsByDeckIdAndUserId(UUID deckId, UUID userId);
+    List<Card> findAllStudyCardsByUserId(UUID userId);
     Card save(Card card);
     void delete(Card card);
 }
