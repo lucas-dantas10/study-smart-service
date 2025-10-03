@@ -1,6 +1,6 @@
 package br.com.study_smart_service.adapter.inbound.web.card;
 
-import br.com.study_smart_service.adapter.inbound.web.card.dto.CardDto;
+import br.com.study_smart_service.adapter.inbound.web.card.dto.FindCardDto;
 import br.com.study_smart_service.application.usecase.card.FindAllCardsByDeckIdUseCase;
 import br.com.study_smart_service.domain.user.model.User;
 import io.swagger.v3.oas.annotations.Operation;
@@ -27,7 +27,7 @@ public class FindAllCardsController {
     @Tag(name = "Card")
     @Operation(summary = "Busca todos os cards vinculados a um deck")
     @GetMapping(value = "/{deckId}/deck", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<CardDto>> findAll(
+    public ResponseEntity<List<FindCardDto>> findAll(
             @PathVariable final String deckId,
             Authentication authentication) {
         User user = (User) authentication.getPrincipal();

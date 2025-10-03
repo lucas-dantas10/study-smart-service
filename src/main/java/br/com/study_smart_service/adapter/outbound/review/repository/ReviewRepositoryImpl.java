@@ -33,4 +33,10 @@ public class ReviewRepositoryImpl implements ReviewRepository {
     public void deleteByCardId(UUID cardId) {
         jpaReviewRepository.deleteByCardId(cardId);
     }
+
+    public Review findRecentByCardId(UUID cardId) {
+        ReviewEntity reviewEntity = jpaReviewRepository.findTopByCardIdOrderByCreatedAtDesc(cardId);
+
+        return reviewMapper.jpaToDomain(reviewEntity);
+    }
 }
