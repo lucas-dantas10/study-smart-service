@@ -6,5 +6,5 @@ import java.util.UUID;
 
 public interface ReviewCardUseCase {
 
-    public void execute(User user, UUID cardId, int quality) throws Exception;
+    void execute(User user, UUID cardId, int quality) throws Exception;
 }

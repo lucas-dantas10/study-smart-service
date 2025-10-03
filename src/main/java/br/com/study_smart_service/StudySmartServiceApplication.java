@@ -4,10 +4,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class StudySmartServiceApplication {
+public final class StudySmartServiceApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(StudySmartServiceApplication.class, args);
-	}
+    private StudySmartServiceApplication() {
+    }
 
+    public static void main(final String[] args) {
+        SpringApplication.run(StudySmartServiceApplication.class, args);
+    }
 }

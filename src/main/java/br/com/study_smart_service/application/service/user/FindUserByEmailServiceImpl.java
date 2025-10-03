@@ -6,8 +6,6 @@ import br.com.study_smart_service.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
-
 @Service
 @RequiredArgsConstructor
 public class FindUserByEmailServiceImpl implements FindUserByEmailUseCase {
