@@ -26,9 +26,7 @@ public class DeleteDeckServiceImpl implements DeleteDeckUseCase {
             throw new EntityNotFoundException("Deck não encontrado.");
         }
 
-        deck.getCards().forEach(card -> {
-            reviewRepository.deleteByCardId(card.getId());
-        });
+        deck.getCards().forEach(card -> reviewRepository.deleteByCardId(card.getId()));
 
         deckRepository.delete(deck);
     }

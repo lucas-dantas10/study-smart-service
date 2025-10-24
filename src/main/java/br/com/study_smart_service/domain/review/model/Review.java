@@ -64,12 +64,15 @@ public class Review {
 
         repetition++;
 
-        if (repetition == 1) {
-            interval = 1;
-        } else if (repetition == 2) {
-            interval = 3;
-        } else {
-            interval = Math.toIntExact(Math.round(interval * easiness));
+        switch (repetition) {
+            case 1:
+                interval = 1;
+                break;
+            case 2:
+                interval = 3;
+                break;
+            default:
+                interval = Math.toIntExact(Math.round(interval * easiness));
         }
 
         calculateEasinessAndNextReview();
@@ -82,7 +85,7 @@ public class Review {
             easiness = LOWER_LIMIT;
         }
 
-        nextReviewAt = LocalDate.now().plusDays((long) interval);
+        nextReviewAt = LocalDate.now().plusDays(interval);
     }
 
     private Double formulaEasiness() {
