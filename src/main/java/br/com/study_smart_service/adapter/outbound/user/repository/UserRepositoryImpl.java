@@ -7,7 +7,6 @@ import br.com.study_smart_service.utils.mapper.user.UserMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Repository

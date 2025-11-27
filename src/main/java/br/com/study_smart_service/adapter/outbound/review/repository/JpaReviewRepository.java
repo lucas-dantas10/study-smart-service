@@ -11,4 +11,5 @@ public interface JpaReviewRepository extends JpaRepository<ReviewEntity, UUID> {
 
     ReviewEntity findFirstByCardIdAndUserIdOrderByCreatedAtDesc(UUID cardId, UUID userId);
     void deleteByCardId(UUID cardId);
+    ReviewEntity findTopByCardIdOrderByCreatedAtDesc(UUID cardId);
 }

@@ -79,5 +79,5 @@ public interface DeckMapper {
         deckEntity.setUpdatedAt(deck.getUpdatedAt());
 
         return deckEntity;
-    };
+    }
 }

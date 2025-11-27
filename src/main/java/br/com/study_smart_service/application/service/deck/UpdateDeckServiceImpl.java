@@ -4,8 +4,6 @@ import br.com.study_smart_service.adapter.inbound.web.deck.dto.DeckDto;
 import br.com.study_smart_service.application.usecase.deck.UpdateDeckUseCase;
 import br.com.study_smart_service.domain.deck.model.Deck;
 import br.com.study_smart_service.domain.deck.repository.DeckRepository;
-import br.com.study_smart_service.domain.user.model.User;
-import br.com.study_smart_service.domain.user.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,7 @@
 package br.com.study_smart_service.infra.config.auth;
 
+import br.com.study_smart_service.application.usecase.user.FindUserByEmailUseCase;
 import br.com.study_smart_service.domain.user.model.User;
-import br.com.study_smart_service.domain.user.repository.UserRepository;
 import br.com.study_smart_service.utils.jwt.JwtUtil;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
@@ -9,10 +9,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.BadRequestException;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -25,7 +22,7 @@ import java.util.List;
 public class JwtAuthFilter extends OncePerRequestFilter {
 
     private final JwtUtil jwtUtil;
-    private final UserRepository userRepository;
+    private final FindUserByEmailUseCase findUserByEmailUseCase;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -44,7 +41,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
         Claims claims = jwtUtil.getClaims(token);
 
-        User user = userRepository.findByEmail(claims.getSubject());
+        User user = findUserByEmailUseCase.execute(claims.getSubject());
 
         if (user == null) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
