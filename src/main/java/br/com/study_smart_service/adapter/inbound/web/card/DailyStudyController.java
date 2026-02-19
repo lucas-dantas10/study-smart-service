@@ -27,7 +27,7 @@ public class DailyStudyController {
     @Operation(summary = "Busca os cards de estudo considerando a data atual")
     @GetMapping("/{deckId}/study")
     public ResponseEntity<List<CardStudyDto>> listReviewCards(
-            @PathVariable("deckId") String deckId,
+            @PathVariable String deckId,
             Authentication authentication
     ) {
         User user = (User) authentication.getPrincipal();
