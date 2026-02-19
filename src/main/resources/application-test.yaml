@@ -1,13 +1,15 @@
 server:
-  port: ${SERVER_PORT:8080}
+  port: 8080
 spring:
+  profiles:
+    active: test
   application:
-    name: study_smart_service
+    name: TEST_PROFILE_ACTIVE
   datasource:
-    url: ${DATABASE_URL:jdbc:mysql://localhost:3306/default}
-    username: ${DATABASE_USERNAME:root}
-    password: ${DATABASE_PASSWORD:root}
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
     hikari:
       initialization-fail-timeout: 60000
       connection-timeout: 30000
@@ -17,7 +19,7 @@ spring:
     show-sql: false
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQLDialect
+        dialect: org.hibernate.dialect.MySQL8Dialect
   jackson:
     date-format: yyyy-MM-dd
     time-zone: America/Sao_Paulo
@@ -27,8 +29,8 @@ spring:
       client:
         registration:
           google:
-            client-id: ${GOOGLE_CLIENT_ID}
-            client-secret: ${GOOGLE_CLIENT_SECRET}
+            client-id: 123
+            client-secret: 12345
             scope: openid,profile,email
             authorization-grant-type: authorization_code
             redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
@@ -39,11 +41,11 @@ spring:
             user-info-uri: https://openidconnect.googleapis.com/v1/userinfo
             user-name-attribute: sub
 jwt:
-  secret: ${JWT_SECRET:test-secret}
-  expiration: ${JWT_EXPIRATION:3600000}
-  frontend-redirect-url: ${JWT_FRONTEND_REDIRECT_URL:http://localhost:3000}
+  secret: secret
+  expiration: expiration
+  frontend-redirect-url: http://localhost:8080
 rate-limit:
   minutes: 1
   tokens: 10
 frontend:
-  uri: ${FRONTEND_URI:http://localhost:3000}
+  uri: http://localhost:8080
