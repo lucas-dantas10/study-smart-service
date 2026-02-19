@@ -1,12 +1,12 @@
 server:
-  port: ${SERVER_PORT}
+  port: ${SERVER_PORT:8080}
 spring:
   application:
     name: study_smart_service
   datasource:
-    url: ${DATABASE_URL}
-    username: ${DATABASE_USERNAME}
-    password: ${DATABASE_PASSWORD}
+    url: ${DATABASE_URL:jdbc:mysql://localhost:3306/default}
+    username: ${DATABASE_USERNAME:root}
+    password: ${DATABASE_PASSWORD:root}
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       initialization-fail-timeout: 60000
@@ -39,11 +39,11 @@ spring:
             user-info-uri: https://openidconnect.googleapis.com/v1/userinfo
             user-name-attribute: sub
 jwt:
-  secret: ${JWT_SECRET}
-  expiration: ${JWT_EXPIRATION}
-  frontend-redirect-url: ${JWT_FRONTEND_REDIRECT_URL}
+  secret: ${JWT_SECRET:test-secret}
+  expiration: ${JWT_EXPIRATION:3600000}
+  frontend-redirect-url: ${JWT_FRONTEND_REDIRECT_URL:http://localhost:3000}
 rate-limit:
   minutes: 1
   tokens: 10
 frontend:
-  uri: ${FRONTEND_URI}
+  uri: ${FRONTEND_URI:http://localhost:3000}
