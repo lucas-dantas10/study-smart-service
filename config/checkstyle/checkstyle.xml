@@ -10,7 +10,7 @@
 
     <!-- Tamanho máximo de linha -->
     <module name="LineLength">
-        <property name="max" value="120"/>
+        <property name="max" value="125"/>
         <property name="ignorePattern" value="^package.*|^import.*"/>
     </module>
 

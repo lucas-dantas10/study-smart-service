@@ -21,24 +21,20 @@ public class MeController {
 
     @Tag(name = "User")
     @Operation(
-        summary = "Buscar dados do usuário autenticado",
-        description = "Retorna as informações básicas do usuário que está autenticado no sistema.",
-        responses = {
-            @ApiResponse(
-                responseCode = "200",
-                description = "Dados do usuário retornados com sucesso",
-                content = @Content(
-                    mediaType = "application/json",
-                    schema = @Schema(implementation = UserResponseDto.class)
-                )
-            ),
-            @ApiResponse(
-                responseCode = "401",
-                description = "Usuário não autenticado",
-                content = @Content
-            )
-        }
-    )
+            summary = "Buscar dados do usuário autenticado",
+            description = "Retorna as informações básicas do usuário que está autenticado no sistema.",
+            responses = {
+                @ApiResponse(
+                        responseCode = "200",
+                        description = "Dados do usuário retornados com sucesso",
+                        content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = UserResponseDto.class))),
+                @ApiResponse(
+                        responseCode = "401",
+                        description = "Usuário não autenticado",
+                        content = @Content)
+            })
     @GetMapping
     public ResponseEntity<UserResponseDto> getMe(Authentication authentication) {
         User user = (User) authentication.getPrincipal();
