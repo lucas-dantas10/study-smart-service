@@ -30,6 +30,7 @@
             <property name="braceAdjustment" value="0"/>
             <property name="caseIndent" value="4"/>
             <property name="lineWrappingIndentation" value="8"/>
+            <property name="forceStrictCondition" value="false"/>
         </module>
 
         <!-- Nomes devem seguir convenções Java -->
