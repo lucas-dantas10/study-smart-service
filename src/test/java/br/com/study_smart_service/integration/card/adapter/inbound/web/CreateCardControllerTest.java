@@ -1,5 +1,6 @@
-package br.com.study_smart_service.adapter.inbound.web.card;
+package br.com.study_smart_service.integration.card.adapter.inbound.web;
 
+import br.com.study_smart_service.adapter.inbound.web.card.CreateCardController;
 import br.com.study_smart_service.adapter.inbound.web.card.dto.CardDto;
 import br.com.study_smart_service.adapter.inbound.web.card.dto.CreateCardDto;
 import br.com.study_smart_service.application.usecase.card.CreateCardUseCase;
