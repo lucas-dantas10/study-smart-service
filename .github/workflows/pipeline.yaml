@@ -48,5 +48,3 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
             docker pull ${{ secrets.DOCKER_USER }}/study-smart:latest
-            docker compose down
-            docker compose up -d
