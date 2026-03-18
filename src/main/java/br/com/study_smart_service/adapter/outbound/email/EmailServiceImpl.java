@@ -33,11 +33,11 @@ public class EmailServiceImpl implements EmailService {
                     MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
                     "UTF-8");
 
-          mimeMessageHelper.setTo(to);
-          mimeMessageHelper.setSubject(subject);
-          mimeMessageHelper.setText(html, true);
+            mimeMessageHelper.setTo(to);
+            mimeMessageHelper.setSubject(subject);
+            mimeMessageHelper.setText(html, true);
 
-          mailSender.send(message);
+            mailSender.send(message);
         } catch (MessagingException e) {
             LogUtils.log(this.getClass().toString(), "error sending email", true);
             return;
