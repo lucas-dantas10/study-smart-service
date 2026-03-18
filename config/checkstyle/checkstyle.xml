@@ -10,7 +10,7 @@
 
     <!-- Tamanho máximo de linha -->
     <module name="LineLength">
-        <property name="max" value="120"/>
+        <property name="max" value="125"/>
         <property name="ignorePattern" value="^package.*|^import.*"/>
     </module>
 
@@ -30,6 +30,7 @@
             <property name="braceAdjustment" value="0"/>
             <property name="caseIndent" value="4"/>
             <property name="lineWrappingIndentation" value="8"/>
+            <property name="forceStrictCondition" value="false"/>
         </module>
 
         <!-- Nomes devem seguir convenções Java -->

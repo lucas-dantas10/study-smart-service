@@ -41,11 +41,11 @@ public class CreateDeckController {
             }
     )
     @PostMapping(
-        consumes = MediaType.APPLICATION_JSON_VALUE,
-        produces = MediaType.APPLICATION_JSON_VALUE)
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<DeckDto> createDeck(
-        @RequestBody CreateDeckDto createDeckRequestDto,
-        Authentication authentication) {
+            @RequestBody CreateDeckDto createDeckRequestDto,
+            Authentication authentication) {
         User user = (User) authentication.getPrincipal();
 
         return ResponseEntity.ok(
