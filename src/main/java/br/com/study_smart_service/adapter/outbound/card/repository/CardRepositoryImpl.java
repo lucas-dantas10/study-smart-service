@@ -45,6 +45,14 @@ public class CardRepositoryImpl implements CardRepository {
                 .toList();
     }
 
+    @Override
+    public List<Card> findAllStudyCardsByUserId(UUID userId) {
+        return jpaCardRepository.findAllStudyCardsByUserId(userId)
+                .stream()
+                .map(cardMapper::jpaToDomain)
+                .toList();
+    }
+
     public Card save(Card card) {
         CardEntity cardEntity = cardMapper.domainToJpaWithDeck(card);
 

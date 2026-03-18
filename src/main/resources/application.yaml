@@ -5,9 +5,9 @@ spring:
   application:
     name: study_smart_service
   datasource:
-    url: ${DATABASE_URL:jdbc:mysql://localhost:3306/default}
-    username: ${DATABASE_USERNAME:root}
-    password: ${DATABASE_PASSWORD:root}
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       max-lifetime: 15000
@@ -15,6 +15,17 @@ spring:
       keepalive-time: 5000
       connection-timeout: 30000
       validation-timeout: 5000
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
   jpa:
     hibernate:
       ddl-auto: validate
