@@ -79,4 +79,96 @@ class CreateCardControllerTest {
                 .andExpect(jsonPath("$.front_text").value("Front text"))
                 .andExpect(jsonPath("$.back_text").value("Back text"));
     }
+
+    @Test
+    void shouldFailWhenFrontTextHasMoreThan255Characters() throws Exception {
+        UUID deckId = UUID.randomUUID();
+
+        Authentication authentication = UserAuthenticationFactory.userAuthentication();
+
+        String frontText256Characters = "a".repeat(256);
+
+        CreateCardDto request = new CreateCardDto(
+                deckId.toString(),
+                frontText256Characters,
+                "Back text");
+
+        mockMvc.perform(post("/api/v1/card")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request))
+                        .principal(authentication))
+                .andExpect(status().isUnprocessableEntity())
+                .andExpect(jsonPath("$.error")
+                        .value("A frente do card deve ter entre 2 a 255 caracteres"))
+                .andExpect(jsonPath("$.code").value(422));
+    }
+
+    @Test
+    void shouldFailWhenFrontTextHasMinorThan2Characters() throws Exception {
+        UUID deckId = UUID.randomUUID();
+
+        Authentication authentication = UserAuthenticationFactory.userAuthentication();
+
+        String frontTextOneCharacter = "a";
+
+        CreateCardDto request = new CreateCardDto(
+                deckId.toString(),
+                frontTextOneCharacter,
+                "Back text");
+
+        mockMvc.perform(post("/api/v1/card")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request))
+                        .principal(authentication))
+                .andExpect(status().isUnprocessableEntity())
+                .andExpect(jsonPath("$.error")
+                        .value("A frente do card deve ter entre 2 a 255 caracteres"))
+                .andExpect(jsonPath("$.code").value(422));
+    }
+
+    @Test
+    void shouldFailWhenBackTextHasMoreThan255Characters() throws Exception {
+        UUID deckId = UUID.randomUUID();
+
+        Authentication authentication = UserAuthenticationFactory.userAuthentication();
+
+        String backText256Characters = "a".repeat(256);
+
+        CreateCardDto request = new CreateCardDto(
+                deckId.toString(),
+                "Front text",
+                backText256Characters);
+
+        mockMvc.perform(post("/api/v1/card")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request))
+                        .principal(authentication))
+                .andExpect(status().isUnprocessableEntity())
+                .andExpect(jsonPath("$.error")
+                        .value("O verso do card deve ter entre 2 a 255 caracteres"))
+                .andExpect(jsonPath("$.code").value(422));
+    }
+
+    @Test
+    void shouldFailWhenBackTextHasMinorThan2Characters() throws Exception {
+        UUID deckId = UUID.randomUUID();
+
+        Authentication authentication = UserAuthenticationFactory.userAuthentication();
+
+        String backTextOneCharacter = "a";
+
+        CreateCardDto request = new CreateCardDto(
+                deckId.toString(),
+                "Front text",
+                backTextOneCharacter);
+
+        mockMvc.perform(post("/api/v1/card")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request))
+                        .principal(authentication))
+                .andExpect(status().isUnprocessableEntity())
+                .andExpect(jsonPath("$.error")
+                        .value("O verso do card deve ter entre 2 a 255 caracteres"))
+                .andExpect(jsonPath("$.code").value(422));
+    }
 }

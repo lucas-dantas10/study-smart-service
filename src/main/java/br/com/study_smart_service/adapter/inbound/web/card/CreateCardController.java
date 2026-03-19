@@ -6,6 +6,7 @@ import br.com.study_smart_service.application.usecase.card.CreateCardUseCase;
 import br.com.study_smart_service.domain.user.model.User;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +29,7 @@ public class CreateCardController {
     @Operation(summary = "Cria card vinculado ao deck")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CardDto> create(
-            @RequestBody CreateCardDto cardDto,
+            @Valid @RequestBody CreateCardDto cardDto,
             Authentication authentication) throws Exception {
         User user = (User) authentication.getPrincipal();
 
