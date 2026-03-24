@@ -55,6 +55,9 @@ class UpdateDeckControllerTest {
                 deckId.toString(),
                 "Updated Deck",
                 null,
+                null,
+                0,
+                0,
                 null
         );
 

@@ -59,6 +59,6 @@ jwt:
   frontend-redirect-url: ${JWT_FRONTEND_REDIRECT_URL}
 rate-limit:
   minutes: 1
-  tokens: 10
+  tokens: 30
 frontend:
   uri: ${FRONTEND_URI}

@@ -28,7 +28,10 @@ public class CreateDeckServiceImpl implements CreateDeckUseCase {
         return new DeckDto(deck.getId().toString(),
             deck.getTitle(),
             deck.getCreatedAt().toString(),
-            null
+            null,
+            deck.getSizeCards(),
+            deck.getSizeCardsStudyToday(),
+            deck.getLastReviewedCard()
         );
     }
 }

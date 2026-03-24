@@ -24,7 +24,10 @@ public class FindAllDeckByUserIdServiceImpl implements FindAllDeckByUserIdUseCas
                         deck.getId().toString(),
                         deck.getTitle(),
                         deck.getCreatedAt().toString(),
-                        deck.getUpdatedAt() != null ? deck.getUpdatedAt().toString() : null)
+                        deck.getUpdatedAt() != null ? deck.getUpdatedAt().toString() : null,
+                        deck.getSizeCards(),
+                        deck.getSizeCardsStudyToday(),
+                        deck.getLastReviewedCard())
                 )
                 .toList();
     }

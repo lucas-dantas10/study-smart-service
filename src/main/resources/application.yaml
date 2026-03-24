@@ -1,6 +1,9 @@
 server:
   port: ${SERVER_PORT:8080}
 spring:
+  h2:
+    console:
+      enabled: true
   application:
     name: study_smart_service
   datasource:
@@ -53,11 +56,11 @@ spring:
             user-info-uri: https://openidconnect.googleapis.com/v1/userinfo
             user-name-attribute: sub
 jwt:
-  secret: development-secret
+  secret: Py+iM0RLDoelxAJ3SZxL5L1z7jujb2WFzT6WfLp08AY=
   expiration: ${JWT_EXPIRATION:3600000}
   frontend-redirect-url: ${JWT_FRONTEND_REDIRECT_URL:http://localhost:5173/auth/callback}
 rate-limit:
   minutes: 1
-  tokens: 10
+  tokens: 100
 frontend:
   uri: ${FRONTEND_URI:http://localhost:5173}

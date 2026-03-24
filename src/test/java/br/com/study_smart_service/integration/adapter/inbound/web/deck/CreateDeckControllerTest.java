@@ -57,6 +57,9 @@ class CreateDeckControllerTest {
                 UUID.randomUUID().toString(),
                 "My Deck",
                 null,
+                null,
+                0,
+                0,
                 null
         );
 

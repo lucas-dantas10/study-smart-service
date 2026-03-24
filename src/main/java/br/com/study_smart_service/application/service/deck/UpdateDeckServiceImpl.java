@@ -32,6 +32,9 @@ public class UpdateDeckServiceImpl implements UpdateDeckUseCase {
         return new DeckDto(deck.getId().toString(),
                 deck.getTitle(),
                 deck.getCreatedAt().toString(),
-                deck.getUpdatedAt().toString());
+                deck.getUpdatedAt().toString(),
+                deck.getSizeCards(),
+                deck.getSizeCardsStudyToday(),
+                deck.getLastReviewedCard());
     }
 }

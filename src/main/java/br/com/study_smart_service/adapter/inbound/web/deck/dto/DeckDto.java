@@ -7,5 +7,8 @@ public record DeckDto(
         String title,
         String createdAt,
         @Nullable
-        String updatedAt) {
+        String updatedAt,
+        int totalCards,
+        int cardsToReviewToday,
+        String lastReviewedAt) {
 }

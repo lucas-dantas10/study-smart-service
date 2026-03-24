@@ -50,7 +50,10 @@ class FindAllDecksControllerTest {
                 UUID.randomUUID().toString(),
                 "My Deck",
                 null,
-                null
+                null,
+                10,
+                4,
+                "2026-03-24T09:30:00"
         );
 
         Mockito.when(findAllDecksByUserIdUseCase.execute(eq(userId)))
@@ -59,6 +62,9 @@ class FindAllDecksControllerTest {
         mockMvc.perform(get("/api/v1/deck")
                         .principal(authentication))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].title").value("My Deck"));
+                .andExpect(jsonPath("$[0].title").value("My Deck"))
+                .andExpect(jsonPath("$[0].total_cards").value(10))
+                .andExpect(jsonPath("$[0].cards_to_review_today").value(4))
+                .andExpect(jsonPath("$[0].last_reviewed_at").value("2026-03-24T09:30:00"));
     }
 }

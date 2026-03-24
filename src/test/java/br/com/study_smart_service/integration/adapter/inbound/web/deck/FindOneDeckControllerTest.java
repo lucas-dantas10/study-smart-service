@@ -50,6 +50,9 @@ class FindOneDeckControllerTest {
                 deckId.toString(),
                 "My Deck",
                 null,
+                null,
+                0,
+                0,
                 null
         );
 

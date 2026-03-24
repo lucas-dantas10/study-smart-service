@@ -2,6 +2,7 @@ package br.com.study_smart_service.adapter.outbound.deck.entity;
 
 import br.com.study_smart_service.adapter.outbound.card.entity.CardEntity;
 import br.com.study_smart_service.adapter.outbound.user.entity.UserEntity;
+import org.hibernate.annotations.Formula;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -49,4 +50,26 @@ public class DeckEntity {
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    @Formula("(SELECT COUNT(c.id) FROM tb_card c WHERE c.deck_id = id)")
+    private int totalCards;
+
+    @Formula(
+            """
+            (
+                SELECT COUNT(c.id)
+                FROM tb_card c
+                LEFT JOIN tb_review r ON r.card_id = c.id
+                WHERE c.deck_id = id
+                  AND (
+                        r.id IS NULL
+                        OR r.next_review_at <= CURRENT_DATE
+                  )
+            )
+            """
+    )
+    private int cardsToReviewToday;
+
+    @Formula("(SELECT MAX(r.created_at) FROM tb_review r JOIN tb_card c ON r.card_id = c.id WHERE c.deck_id = id)")
+    private LocalDateTime lastReview;
 }

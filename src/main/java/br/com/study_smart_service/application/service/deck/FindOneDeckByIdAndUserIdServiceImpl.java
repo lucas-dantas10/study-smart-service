@@ -27,6 +27,9 @@ public class FindOneDeckByIdAndUserIdServiceImpl implements FindOneDeckByIdAndUs
                 deck.getId().toString(),
                 deck.getTitle(),
                 deck.getCreatedAt().toString(),
-                deck.getUpdatedAt() != null ? deck.getUpdatedAt().toString() : null);
+                deck.getUpdatedAt() != null ? deck.getUpdatedAt().toString() : null,
+                deck.getSizeCards(),
+                deck.getSizeCardsStudyToday(),
+                deck.getLastReviewedCard());
     }
 }

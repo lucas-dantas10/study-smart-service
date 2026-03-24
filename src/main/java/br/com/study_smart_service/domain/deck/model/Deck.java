@@ -15,6 +15,9 @@ public class Deck {
     private List<Card> cards;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private int totalCards;
+    private int cardsToReviewToday;
+    private LocalDateTime lastReview;
 
     public Deck() {
     }
@@ -61,6 +64,18 @@ public class Deck {
         return cards;
     }
 
+    public int getSizeCards() {
+        return totalCards;
+    }
+
+    public int getSizeCardsStudyToday() {
+        return cardsToReviewToday;
+    }
+
+    public void setCardsToReviewToday(int cardsToReviewToday) {
+        this.cardsToReviewToday = cardsToReviewToday;
+    }
+
     public void setCards(List<Card> cards) {
         this.cards = cards;
     }
@@ -79,5 +94,17 @@ public class Deck {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getLastReviewedCard() {
+        return lastReview != null ? lastReview.toString() : "";
+    }
+
+    public void setLastReview(LocalDateTime lastReview) {
+        this.lastReview = lastReview;
+    }
+
+    public void setTotalCards(int totalCards) {
+        this.totalCards = totalCards;
     }
 }

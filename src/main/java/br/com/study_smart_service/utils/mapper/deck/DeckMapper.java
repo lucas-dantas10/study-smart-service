@@ -44,6 +44,9 @@ public interface DeckMapper {
         deck.setUser(user);
         deck.setCreatedAt(deckEntity.getCreatedAt());
         deck.setUpdatedAt(deckEntity.getUpdatedAt());
+        deck.setTotalCards(deckEntity.getTotalCards());
+        deck.setCardsToReviewToday(deckEntity.getCardsToReviewToday());
+        deck.setLastReview(deckEntity.getLastReview());
 
         return deck;
     }
