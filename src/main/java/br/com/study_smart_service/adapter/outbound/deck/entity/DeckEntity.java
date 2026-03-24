@@ -57,7 +57,7 @@ public class DeckEntity {
     @Formula(
             """
             (
-                SELECT COUNT(c.id)
+                SELECT COUNT(DISTINCT c.id)
                 FROM tb_card c
                 LEFT JOIN tb_review r ON r.card_id = c.id
                 WHERE c.deck_id = id
