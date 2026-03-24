@@ -56,16 +56,32 @@ public class DeckEntity {
 
     @Formula(
             """
-            (
-                SELECT COUNT(DISTINCT c.id)
-                FROM tb_card c
-                LEFT JOIN tb_review r ON r.card_id = c.id
-                WHERE c.deck_id = id
-                  AND (
-                        r.id IS NULL
-                        OR r.next_review_at <= CURRENT_DATE
-                  )
-            )
+                     (
+                                SELECT COUNT(*)
+                                FROM tb_card c
+                                WHERE c.deck_id = id
+                                  AND (
+                                        NOT EXISTS (
+                                            SELECT 1
+                                            FROM tb_review r
+                                            WHERE r.card_id = c.id
+                                              AND r.user_id = user_id
+                                        )
+                                        OR EXISTS (
+                                            SELECT 1
+                                            FROM tb_review r
+                                            WHERE r.card_id = c.id
+                                              AND r.user_id = user_id
+                                              AND r.created_at = (
+                                                    SELECT MAX(r2.created_at)
+                                                    FROM tb_review r2
+                                                    WHERE r2.card_id = c.id
+                                                      AND r2.user_id = user_id
+                                              )
+                                              AND r.next_review_at <= CURRENT_DATE
+                                        )
+                                  )
+                            )
             """
     )
     private int cardsToReviewToday;
