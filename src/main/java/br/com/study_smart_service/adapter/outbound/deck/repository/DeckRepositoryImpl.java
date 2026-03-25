@@ -5,9 +5,10 @@ import br.com.study_smart_service.domain.deck.model.Deck;
 import br.com.study_smart_service.domain.deck.repository.DeckRepository;
 import br.com.study_smart_service.utils.mapper.deck.DeckMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.UUID;
 
 @Repository
@@ -29,11 +30,9 @@ public class DeckRepositoryImpl implements DeckRepository {
                 .orElse(null);
     }
 
-    public List<Deck> findAllByUserId(UUID userId) {
-        return jpaDeckRepository.findAllByUserId(userId)
-            .stream()
-            .map(deckMapper::jpaToDomain)
-            .toList();
+    public Page<Deck> findAllByUserId(UUID userId, Pageable pageable) {
+        return jpaDeckRepository.findAllByUserId(userId, pageable)
+            .map(deckMapper::jpaToDomain);
     }
 
     public Deck save(Deck deck) {

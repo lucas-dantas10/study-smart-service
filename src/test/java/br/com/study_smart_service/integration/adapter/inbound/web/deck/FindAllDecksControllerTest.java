@@ -11,6 +11,9 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
@@ -19,6 +22,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.List;
 import java.util.UUID;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -56,15 +60,15 @@ class FindAllDecksControllerTest {
                 "2026-03-24T09:30:00"
         );
 
-        Mockito.when(findAllDecksByUserIdUseCase.execute(eq(userId)))
-                .thenReturn(List.of(deck));
+        Mockito.when(findAllDecksByUserIdUseCase.execute(eq(userId), any(Pageable.class)))
+                .thenReturn(new PageImpl<>(List.of(deck), PageRequest.of(0, 10), 1));
 
         mockMvc.perform(get("/api/v1/deck")
                         .principal(authentication))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].title").value("My Deck"))
-                .andExpect(jsonPath("$[0].total_cards").value(10))
-                .andExpect(jsonPath("$[0].cards_to_review_today").value(4))
-                .andExpect(jsonPath("$[0].last_reviewed_at").value("2026-03-24T09:30:00"));
+                .andExpect(jsonPath("$.content[0].title").value("My Deck"))
+                .andExpect(jsonPath("$.content[0].total_cards").value(10))
+                .andExpect(jsonPath("$.content[0].cards_to_review_today").value(4))
+                .andExpect(jsonPath("$.content[0].last_reviewed_at").value("2026-03-24T09:30:00"));
     }
 }

@@ -18,8 +18,6 @@ public class CreateUserServiceImpl implements CreateUserUseCase {
     public User execute(CreateUserDto dto) {
         User user = userMapper.dtoToDomain(dto);
 
-        userRepository.save(user);
-
-        return user;
+        return userRepository.save(user);
     }
 }

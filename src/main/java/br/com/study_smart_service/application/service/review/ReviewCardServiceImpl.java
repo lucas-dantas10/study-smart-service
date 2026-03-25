@@ -31,17 +31,15 @@ public class ReviewCardServiceImpl implements ReviewCardUseCase {
 
         Review reviewModel = reviewRepository.findFirstByCardIdAndUserId(cardId, user.getId());
 
-        if (reviewModel == null) {
-            reviewModel = new Review(user, card);
-        } else {
-            reviewModel = new Review(user, card).createNewReview(
-                    reviewModel.getNextReviewAt(),
-                    reviewModel.getInterval(),
-                    reviewModel.getRepetition(),
-                    reviewModel.getEasiness(),
-                    reviewModel.getLastQuality()
-            );
-        }
+        reviewModel = reviewModel == null
+                ? new Review(user, card)
+                : new Review(user, card).createNewReview(
+                        reviewModel.getNextReviewAt(),
+                        reviewModel.getInterval(),
+                        reviewModel.getRepetition(),
+                        reviewModel.getEasiness(),
+                        reviewModel.getLastQuality()
+                );
 
         reviewModel.review(EQuality.fromQuality(quality));
 

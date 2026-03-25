@@ -1,5 +1,6 @@
 package br.com.study_smart_service.utils.mapper.deck;
 
+import br.com.study_smart_service.adapter.inbound.web.deck.dto.DeckDto;
 import br.com.study_smart_service.adapter.outbound.card.entity.CardEntity;
 import br.com.study_smart_service.adapter.outbound.deck.entity.DeckEntity;
 import br.com.study_smart_service.adapter.outbound.user.entity.UserEntity;
@@ -14,6 +15,18 @@ import java.util.List;
 
 @Mapper(componentModel = "spring", uses = UserMapper.class)
 public interface DeckMapper {
+
+    default DeckDto domainToDto(Deck deck) {
+        return new DeckDto(
+                deck.getId().toString(),
+                deck.getTitle(),
+                deck.getCreatedAt().toString(),
+                deck.getUpdatedAt() != null ? deck.getUpdatedAt().toString() : null,
+                deck.getSizeCards(),
+                deck.getSizeCardsStudyToday(),
+                deck.getLastReviewedCard()
+        );
+    }
 
     default Deck jpaToDomain(DeckEntity deckEntity) {
         List<Card> cards = new ArrayList<>();

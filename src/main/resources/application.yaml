@@ -64,3 +64,5 @@ rate-limit:
   tokens: 100
 frontend:
   uri: ${FRONTEND_URI:http://localhost:5173}
+user:
+  email: ${USER_EMAIL_TEST:teste@example.com}

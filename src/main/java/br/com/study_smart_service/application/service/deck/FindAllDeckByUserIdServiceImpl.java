@@ -4,10 +4,12 @@ import br.com.study_smart_service.adapter.inbound.web.deck.dto.DeckDto;
 import br.com.study_smart_service.application.usecase.deck.FindAllDeckByUserIdUseCase;
 import br.com.study_smart_service.domain.deck.model.Deck;
 import br.com.study_smart_service.domain.deck.repository.DeckRepository;
+import br.com.study_smart_service.utils.mapper.deck.DeckMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -15,20 +17,11 @@ import java.util.UUID;
 public class FindAllDeckByUserIdServiceImpl implements FindAllDeckByUserIdUseCase {
 
     private final DeckRepository deckRepository;
+    private final DeckMapper deckMapper;
 
-    public List<DeckDto> execute(UUID userId) {
-        List<Deck> decks = deckRepository.findAllByUserId(userId);
+    public Page<DeckDto> execute(UUID userId, Pageable pageable) {
+        Page<Deck> decks = deckRepository.findAllByUserId(userId, pageable);
 
-        return decks.stream()
-                .map(deck -> new DeckDto(
-                        deck.getId().toString(),
-                        deck.getTitle(),
-                        deck.getCreatedAt().toString(),
-                        deck.getUpdatedAt() != null ? deck.getUpdatedAt().toString() : null,
-                        deck.getSizeCards(),
-                        deck.getSizeCardsStudyToday(),
-                        deck.getLastReviewedCard())
-                )
-                .toList();
+        return decks.map(deckMapper::domainToDto);
     }
 }
