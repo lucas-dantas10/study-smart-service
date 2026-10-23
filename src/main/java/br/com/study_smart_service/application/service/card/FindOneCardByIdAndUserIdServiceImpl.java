@@ -28,6 +28,7 @@ public class FindOneCardByIdAndUserIdServiceImpl implements FindOneCardByIdAndUs
                 card.getFrontText(),
                 card.getBackText(),
                 card.getCreatedAt().toString(),
-                card.getUpdatedAt() != null ? card.getUpdatedAt().toString() : null);
+                card.getUpdatedAt() != null ? card.getUpdatedAt().toString() : null,
+                card.getTags());
     }
 }

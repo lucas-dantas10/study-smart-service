@@ -29,7 +29,8 @@ public class FindAllCardsByDeckIdServiceImpl implements FindAllCardsByDeckIdUseC
                             card.getBackText(),
                             card.getCreatedAt().toString(),
                             card.getUpdatedAt() != null ? card.getUpdatedAt().toString() : null,
-                            review != null ? review.getNextReviewAt() : null);
+                            review != null ? review.getNextReviewAt() : null,
+                            card.getTags());
                 })
                 .toList();
     }

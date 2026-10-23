@@ -20,6 +20,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.UUID;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -63,7 +64,8 @@ class UpdateCardControllerTest {
                 eq(cardId),
                 eq(userId),
                 eq("Updated Front"),
-                eq("Updated Back")
+                eq("Updated Back"),
+                any()
         )).thenReturn(request);
 
         mockMvc.perform(put("/api/v1/card/{cardId}", cardId)

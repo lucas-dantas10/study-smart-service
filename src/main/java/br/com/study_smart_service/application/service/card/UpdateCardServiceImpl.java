@@ -1,5 +1,7 @@
 package br.com.study_smart_service.application.service.card;
 
+import java.util.List;
+
 import br.com.study_smart_service.adapter.inbound.web.card.dto.CardDto;
 import br.com.study_smart_service.application.usecase.card.UpdateCardUseCase;
 import br.com.study_smart_service.domain.card.model.Card;
@@ -17,7 +19,7 @@ public class UpdateCardServiceImpl implements UpdateCardUseCase {
 
     private final CardRepository cardRepository;
 
-    public CardDto execute(UUID cardId, UUID userId, String frontText, String backText) throws Exception {
+    public CardDto execute(UUID cardId, UUID userId, String frontText, String backText, List<String> tags) throws Exception {
         Card card = cardRepository.findByIdAndUserId(cardId, userId);
 
         if (card == null) {
@@ -26,6 +28,11 @@ public class UpdateCardServiceImpl implements UpdateCardUseCase {
 
         card.setFrontText(frontText);
         card.setBackText(backText);
+
+        if (tags != null) {
+            card.setTags(tags);
+        }
+
         card.setUpdatedAt(LocalDateTime.now());
 
         cardRepository.save(card);
@@ -35,6 +42,7 @@ public class UpdateCardServiceImpl implements UpdateCardUseCase {
                 card.getFrontText(),
                 card.getBackText(),
                 card.getCreatedAt().toString(),
-                card.getUpdatedAt() != null ? card.getUpdatedAt().toString() : null);
+                card.getUpdatedAt() != null ? card.getUpdatedAt().toString() : null,
+                card.getTags());
     }
 }
