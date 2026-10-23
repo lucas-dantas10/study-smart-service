@@ -13,7 +13,14 @@ public record FindCardDto(
         List<String> tags
 ) {
 
-    public FindCardDto(String id, String frontText, String backText, String createdAt, String updatedAt, LocalDate nextReviewAt) {
+    public FindCardDto(
+            String id,
+            String frontText,
+            String backText,
+            String createdAt,
+            String updatedAt,
+            LocalDate nextReviewAt
+    ) {
         this(id, frontText, backText, createdAt, updatedAt, nextReviewAt, List.of());
     }
 }
