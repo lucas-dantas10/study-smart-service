@@ -78,6 +78,17 @@ public class Review {
         calculateEasinessAndNextReview();
     }
 
+    /**
+     * Simula a avaliação sem alterar este estado e devolve em quantos dias o card voltaria.
+     */
+    public int previewIntervalInDays(EQuality quality) {
+        Review simulation = new Review(null, null);
+        simulation.createNewReview(nextReviewAt, interval, repetition, easiness, lastQuality);
+        simulation.review(quality);
+
+        return simulation.interval;
+    }
+
     private void calculateEasinessAndNextReview() {
         easiness += formulaEasiness();
 

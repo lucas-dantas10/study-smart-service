@@ -1,5 +1,9 @@
 package br.com.study_smart_service.utils.mapper.card;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import br.com.study_smart_service.adapter.outbound.card.entity.CardEntity;
 import br.com.study_smart_service.adapter.outbound.deck.entity.DeckEntity;
 import br.com.study_smart_service.adapter.outbound.user.entity.UserEntity;
@@ -19,6 +23,7 @@ public interface CardMapper {
             @Mapping(source = "cardJpa.deck", target = "deck"),
             @Mapping(source = "cardJpa.frontText", target = "frontText"),
             @Mapping(source = "cardJpa.backText", target = "backText"),
+            @Mapping(source = "cardJpa.tags", target = "tags"),
             @Mapping(source = "cardJpa.createdAt", target = "createdAt"),
             @Mapping(source = "cardJpa.updatedAt", target = "updatedAt")
     })
@@ -29,10 +34,23 @@ public interface CardMapper {
             @Mapping(source = "card.deck", target = "deck", ignore = true),
             @Mapping(source = "card.frontText", target = "frontText"),
             @Mapping(source = "card.backText", target = "backText"),
+            @Mapping(source = "card.tags", target = "tags"),
             @Mapping(source = "card.createdAt", target = "createdAt"),
             @Mapping(source = "card.updatedAt", target = "updatedAt")
     })
     CardEntity domainToJpa(Card card);
+
+    default List<String> tagsToList(String tags) {
+        if (tags == null || tags.isBlank()) {
+            return new ArrayList<>();
+        }
+
+        return new ArrayList<>(Arrays.asList(tags.split(",")));
+    }
+
+    default String tagsToString(List<String> tags) {
+        return tags == null || tags.isEmpty() ? null : String.join(",", tags);
+    }
 
     default CardEntity domainToJpaWithDeck(Card card) {
         CardEntity cardEntity = domainToJpa(card);

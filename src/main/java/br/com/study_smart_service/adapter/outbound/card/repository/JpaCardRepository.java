@@ -1,6 +1,7 @@
 package br.com.study_smart_service.adapter.outbound.card.repository;
 
 import br.com.study_smart_service.adapter.outbound.card.entity.CardEntity;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -76,4 +77,32 @@ public interface JpaCardRepository extends JpaRepository<CardEntity, UUID> {
             """
     )
     List<CardEntity> findAllStudyCardsByUserId(UUID userId);
+
+    @Query("""
+            SELECT c FROM CardEntity c
+            JOIN c.deck d
+            WHERE d.user.id = :userId
+              AND (:text = '' OR LOWER(c.frontText) LIKE :text ESCAPE '!' OR LOWER(c.backText) LIKE :text ESCAPE '!')
+              AND (:tag = '' OR CONCAT(',', COALESCE(c.tags, ''), ',') LIKE :tag)
+            ORDER BY c.createdAt DESC
+            """)
+    List<CardEntity> search(UUID userId, String text, String tag, Pageable pageable);
+
+    @Query("""
+            SELECT c FROM CardEntity c
+            JOIN c.deck d
+            WHERE d.user.id = :userId AND d.id = :deckId
+              AND (:text = '' OR LOWER(c.frontText) LIKE :text ESCAPE '!' OR LOWER(c.backText) LIKE :text ESCAPE '!')
+              AND (:tag = '' OR CONCAT(',', COALESCE(c.tags, ''), ',') LIKE :tag)
+            ORDER BY c.createdAt DESC
+            """)
+    List<CardEntity> searchInDeck(UUID userId, UUID deckId, String text, String tag, Pageable pageable);
+
+    @Query("""
+            SELECT COUNT(c) FROM CardEntity c
+            JOIN c.deck d
+            WHERE d.user.id = :userId
+              AND NOT EXISTS (SELECT 1 FROM ReviewEntity r WHERE r.card = c AND r.user.id = :userId)
+            """)
+    long countWithoutReviewByUserId(UUID userId);
 }

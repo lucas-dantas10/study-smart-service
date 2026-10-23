@@ -14,4 +14,9 @@ public interface CardRepository {
     List<Card> findAllStudyCardsByUserId(UUID userId);
     Card save(Card card);
     void delete(Card card);
+
+    /** Busca textual (frente/verso) e/ou por tag nos cards do usuário; deckId opcional. */
+    List<Card> search(UUID userId, UUID deckId, String text, String tag, int limit);
+
+    long countWithoutReviewByUserId(UUID userId);
 }

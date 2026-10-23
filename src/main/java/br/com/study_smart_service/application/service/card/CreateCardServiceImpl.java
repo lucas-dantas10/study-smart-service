@@ -1,5 +1,7 @@
 package br.com.study_smart_service.application.service.card;
 
+import java.util.List;
+
 import br.com.study_smart_service.adapter.inbound.web.card.dto.CardDto;
 import br.com.study_smart_service.application.usecase.card.CreateCardUseCase;
 import br.com.study_smart_service.domain.card.model.Card;
@@ -19,14 +21,14 @@ public class CreateCardServiceImpl implements CreateCardUseCase {
     private final CardRepository cardRepository;
     private final DeckRepository deckRepository;
 
-    public CardDto execute(UUID deckId, UUID userId, String frontText, String backText) throws Exception {
+    public CardDto execute(UUID deckId, UUID userId, String frontText, String backText, List<String> tags) throws Exception {
         Deck deck = deckRepository.findByIdAndUserId(deckId, userId);
 
         if (deck == null) {
             throw new EntityNotFoundException("Deck não encontrado.");
         }
 
-        Card card = new Card(deck, frontText, backText);
+        Card card = new Card(deck, frontText, backText, tags);
 
         card = cardRepository.save(card);
 
@@ -35,6 +37,7 @@ public class CreateCardServiceImpl implements CreateCardUseCase {
                 card.getFrontText(),
                 card.getBackText(),
                 card.getCreatedAt().toString(),
-                card.getUpdatedAt() != null ? card.getUpdatedAt().toString() : null);
+                card.getUpdatedAt() != null ? card.getUpdatedAt().toString() : null,
+                card.getTags());
     }
 }

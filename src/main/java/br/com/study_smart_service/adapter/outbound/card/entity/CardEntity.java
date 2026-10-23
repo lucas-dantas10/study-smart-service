@@ -38,6 +38,9 @@ public class CardEntity {
     @Column(name = "back_text", nullable = false)
     private String backText;
 
+    @Column(name = "tags", length = 255)
+    private String tags;
+
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 

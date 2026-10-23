@@ -1,5 +1,9 @@
 package br.com.study_smart_service.utils.mapper.review;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import br.com.study_smart_service.adapter.outbound.review.entity.ReviewEntity;
 import br.com.study_smart_service.domain.review.model.Review;
 import br.com.study_smart_service.utils.mapper.user.UserMapper;
@@ -37,4 +41,12 @@ public interface ReviewMapper {
         @Mapping(source = "review.updatedAt", target = "updatedAt")
     })
     ReviewEntity domainToJpa(Review review);
+
+    default String tagsToString(List<String> tags) {
+        return tags == null || tags.isEmpty() ? null : String.join(",", tags);
+    }
+
+    default List<String> tagsToList(String tags) {
+        return tags == null || tags.isBlank() ? new ArrayList<>() : new ArrayList<>(Arrays.asList(tags.split(",")));
+    }
 }

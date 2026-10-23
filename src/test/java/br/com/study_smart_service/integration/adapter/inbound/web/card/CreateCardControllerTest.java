@@ -68,7 +68,8 @@ class CreateCardControllerTest {
                 eq(deckId),
                 any(UUID.class),
                 eq("Front text"),
-                eq("Back text")
+                eq("Back text"),
+                any()
         )).thenReturn(response);
 
         mockMvc.perform(post("/api/v1/card")

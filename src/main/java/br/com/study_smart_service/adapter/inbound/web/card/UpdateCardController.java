@@ -41,7 +41,8 @@ public class UpdateCardController {
                 UUID.fromString(cardId),
                 user.getId(),
                 cardDto.frontText(),
-                cardDto.backText());
+                cardDto.backText(),
+                cardDto.tags());
 
         return ResponseEntity.ok(card);
     }

@@ -37,7 +37,8 @@ public class CreateCardController {
                 UUID.fromString(cardDto.deckId()),
                 user.getId(),
                 cardDto.frontText(),
-                cardDto.backText());
+                cardDto.backText(),
+                cardDto.tags());
 
         return ResponseEntity.ok(card);
     }
